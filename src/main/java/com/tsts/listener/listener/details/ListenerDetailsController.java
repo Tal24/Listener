@@ -1,30 +1,23 @@
 package com.tsts.listener.listener.details;
 
 import com.tsts.listener.domain.Listener;
-import com.tsts.listener.domain.Name;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.time.LocalDate;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ListenerDetailsController {
 
-    private final ListenerDetailsRepository listenerDetailsRepository;
+    private final ListenerRegistrationService listenerRegistrationService;
 
-    public ListenerDetailsController (ListenerDetailsRepository listenerDetailsRepository) {
-        this.listenerDetailsRepository = listenerDetailsRepository;
+    public ListenerDetailsController (ListenerRegistrationService listenerRegistrationService) {
+        this.listenerRegistrationService = listenerRegistrationService;
     }
 
-    @GetMapping
-    public ResponseEntity<String> getYoungestListener () {
-
-        System.out.println("Who Is The Youngest");
-        Listener listener = new Listener(UUID.randomUUID(), new Name("Tal"), new Name("Red"), LocalDate.of(2000, 1, 10));
-        listenerDetailsRepository.save(listener);
-        return ResponseEntity.ok("Who Is The Youngest");
+    @PostMapping("register")
+    public ResponseEntity<Listener> registerListener (@RequestBody Listener listener) {
+        return ResponseEntity.ok(listenerRegistrationService.register(listener));
     }
 
 }

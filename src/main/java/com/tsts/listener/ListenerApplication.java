@@ -3,6 +3,7 @@ package com.tsts.listener;
 import com.tsts.listener.couchbase.CouchbaseConfiguration;
 import com.tsts.listener.listener.details.ListenerDetailsController;
 import com.tsts.listener.listener.details.ListenerDetailsRepository;
+import com.tsts.listener.listener.details.ListenerRegistrationService;
 import com.tsts.listener.mongo.MongoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
@@ -21,7 +22,12 @@ public class ListenerApplication {
 
     @Bean
     public ListenerDetailsController listenerDetailsController (ListenerDetailsRepository listenerDetailsRepository) {
-        return new ListenerDetailsController(listenerDetailsRepository);
+        return new ListenerDetailsController(listenerRegistrationService(listenerDetailsRepository));
+    }
+
+    @Bean
+    public ListenerRegistrationService listenerRegistrationService (ListenerDetailsRepository listenerDetailsRepository) {
+        return new ListenerRegistrationService(listenerDetailsRepository);
     }
 
 }
