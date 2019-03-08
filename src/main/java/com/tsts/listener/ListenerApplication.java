@@ -7,12 +7,12 @@ import com.tsts.listener.mongo.MongoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 @EnableAutoConfiguration
 @SpringBootConfiguration
-@ImportAutoConfiguration(classes = {MongoConfiguration.class, CouchbaseConfiguration.class})
+@Import({MongoConfiguration.class, CouchbaseConfiguration.class})
 public class ListenerApplication {
 
     public static void main (String[] args) {
