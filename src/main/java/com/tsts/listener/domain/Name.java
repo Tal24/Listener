@@ -1,4 +1,4 @@
-package com.tsts.listener;
+package com.tsts.listener.domain;
 
 import java.text.MessageFormat;
 

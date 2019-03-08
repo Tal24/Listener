@@ -1,5 +1,7 @@
-package com.tsts.listener;
+package com.tsts.listener.listener.details;
 
+import com.tsts.listener.domain.Listener;
+import com.tsts.listener.domain.Name;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

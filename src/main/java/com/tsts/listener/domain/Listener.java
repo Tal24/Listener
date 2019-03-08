@@ -1,4 +1,4 @@
-package com.tsts.listener;
+package com.tsts.listener.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
