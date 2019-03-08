@@ -8,12 +8,14 @@ import com.tsts.listener.mongo.MongoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {MongoAutoConfiguration.class, CouchbaseAutoConfiguration.class})
 @SpringBootConfiguration
-@Import({MongoConfiguration.class, CouchbaseConfiguration.class})
+@ImportAutoConfiguration({MongoConfiguration.class, CouchbaseConfiguration.class})
 public class ListenerApplication {
 
     public static void main (String[] args) {

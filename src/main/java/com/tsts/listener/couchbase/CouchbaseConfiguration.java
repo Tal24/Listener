@@ -1,13 +1,16 @@
 package com.tsts.listener.couchbase;
 
 
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseAutoConfiguration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 
 import java.util.Collections;
 import java.util.List;
 
 @ConditionalOnProperty(value = "db", havingValue = "couchbase")
+@ImportAutoConfiguration(CouchbaseAutoConfiguration.class)
 public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
 
     @Override
