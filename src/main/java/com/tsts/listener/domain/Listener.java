@@ -27,6 +27,8 @@ public class Listener {
         addFavoriteCategory(category);
     }
 
+    private Listener() { }
+
     public boolean addFavoriteCategory (Category category) {
         return favoriteCategories.add(category);
     }
