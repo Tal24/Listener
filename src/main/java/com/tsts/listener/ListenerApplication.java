@@ -6,6 +6,7 @@ import com.tsts.listener.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.listener.details.ListenerRegistrationService;
 import com.tsts.listener.mongo.MongoConfiguration;
 import com.tsts.listener.newshow.NewShowEvent;
+import com.tsts.listener.newshow.NewShowEventConsumer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -33,6 +34,11 @@ public class ListenerApplication {
     @Bean
     public ListenerRegistrationService listenerRegistrationService (ListenerDetailsRepository listenerDetailsRepository) {
         return new ListenerRegistrationService(listenerDetailsRepository);
+    }
+
+    @Bean
+    public NewShowEventConsumer newShowEventConsumer () {
+        return new NewShowEventConsumer();
     }
 
 }
