@@ -10,7 +10,7 @@ import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import java.util.Collections;
 import java.util.List;
 
-@ConditionalOnProperty(value = "db", havingValue = "couchbase")
+@ConditionalOnProperty(value = "spring.datasource.name", havingValue = "couchbase")
 @ImportAutoConfiguration(CouchbaseAutoConfiguration.class)
 @ConfigurationProperties(prefix = "spring.data.couchbase")
 public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {

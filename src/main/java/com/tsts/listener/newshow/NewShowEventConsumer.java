@@ -6,8 +6,14 @@ import static com.tsts.listener.newshow.NewShowEvent.NEW_SHOW;
 
 public class NewShowEventConsumer {
 
+    private final NewShowService newShowService;
+
+    public NewShowEventConsumer (NewShowService newShowService) {
+        this.newShowService = newShowService;
+    }
+
     @StreamListener(NEW_SHOW)
     public void handleNewShowEvent (Show show) {
-        System.out.println(show);
+        newShowService.handleNewShowEvent(show);
     }
 }
