@@ -6,24 +6,23 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class Listener {
 
     @Id
-    private UUID id;
+    private String id;
     private Name firstName;
     private Name lastName;
     private List<Category> favoriteCategories = new ArrayList<>();
 
-    public Listener (String firstName, String lastName) {
-        this.id = UUID.randomUUID();
+    public Listener (String id, String firstName, String lastName) {
+        this.id = id;
         this.firstName = new Name(firstName);
         this.lastName = new Name(lastName);
     }
 
-    public Listener (String firstName, String lastName, Category category) {
-        this(firstName, lastName);
+    public Listener (String id, String firstName, String lastName, Category category) {
+        this(id, firstName, lastName);
         addFavoriteCategory(category);
     }
 
@@ -38,7 +37,7 @@ public class Listener {
     }
 
     public String getId () {
-        return id.toString();
+        return id;
     }
 
     public String getFirstName () {
