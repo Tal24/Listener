@@ -1,11 +1,9 @@
 package com.tsts.listener;
 
-import com.tsts.listener.couchbase.CouchbaseConfiguration;
 import com.tsts.listener.listener.details.ListenerDetailsController;
 import com.tsts.listener.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.listener.details.ListenerDetailsService;
 import com.tsts.listener.listener.details.ListenerRegistrationService;
-import com.tsts.listener.mongo.MongoConfiguration;
 import com.tsts.listener.newshow.NewShowEvent;
 import com.tsts.listener.newshow.NewShowEventConsumer;
 import com.tsts.listener.newshow.NewShowService;
@@ -13,15 +11,11 @@ import com.tsts.listener.notification.PushNotificationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 
-@EnableAutoConfiguration(exclude = {MongoAutoConfiguration.class, CouchbaseAutoConfiguration.class})
+@EnableAutoConfiguration
 @SpringBootConfiguration
-@ImportAutoConfiguration({MongoConfiguration.class, CouchbaseConfiguration.class})
 @EnableBinding(NewShowEvent.class)
 public class ListenerApplication {
 
