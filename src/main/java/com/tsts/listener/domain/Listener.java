@@ -1,32 +1,33 @@
 package com.tsts.listener.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.data.annotation.Id;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class Listener {
 
     @Id
-    private String id;
+    private UUID id;
     private Name firstName;
     private Name lastName;
     private List<Category> favoriteCategories = new ArrayList<>();
 
-    public Listener (String id, String firstName, String lastName) {
+    @JsonCreator
+    public Listener (UUID id, String firstName, String lastName) {
         this.id = id;
         this.firstName = new Name(firstName);
         this.lastName = new Name(lastName);
     }
 
-    public Listener (String id, String firstName, String lastName, Category category) {
+    public Listener (UUID id, String firstName, String lastName, Category category) {
         this(id, firstName, lastName);
         addFavoriteCategory(category);
     }
-
-    private Listener() { }
 
     public boolean addFavoriteCategory (Category category) {
         return favoriteCategories.add(category);
@@ -37,7 +38,7 @@ public class Listener {
     }
 
     public String getId () {
-        return id;
+        return id.toString();
     }
 
     public String getFirstName () {
