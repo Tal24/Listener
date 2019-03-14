@@ -1,5 +1,6 @@
 package com.tsts.listener.domain;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.Value;
 import org.springframework.data.annotation.Id;
 
@@ -13,6 +14,11 @@ public class Show {
     private Name name;
     @NotNull
     private Category category;
-    private boolean listenersTalks;
+    private boolean listenersTalk;
+
+    @JsonGetter("listenersTalk")
+    public boolean allowListenersTalk () {
+        return listenersTalk;
+    }
 
 }
