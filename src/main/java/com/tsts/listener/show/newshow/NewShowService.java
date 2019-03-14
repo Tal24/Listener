@@ -1,6 +1,7 @@
-package com.tsts.listener.newshow;
+package com.tsts.listener.show.newshow;
 
 import com.tsts.listener.domain.Listener;
+import com.tsts.listener.domain.Show;
 import com.tsts.listener.listener.details.ListenerDetailsService;
 import com.tsts.listener.notification.PushNotificationService;
 

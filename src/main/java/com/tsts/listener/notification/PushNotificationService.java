@@ -1,7 +1,7 @@
 package com.tsts.listener.notification;
 
 import com.tsts.listener.domain.Listener;
-import com.tsts.listener.newshow.Show;
+import com.tsts.listener.domain.Show;
 
 import java.text.MessageFormat;
 import java.util.List;

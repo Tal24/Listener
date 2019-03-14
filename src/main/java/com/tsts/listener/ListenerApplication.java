@@ -4,10 +4,10 @@ import com.tsts.listener.listener.details.ListenerDetailsController;
 import com.tsts.listener.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.listener.details.ListenerDetailsService;
 import com.tsts.listener.listener.details.ListenerRegistrationService;
-import com.tsts.listener.newshow.NewShowEvent;
-import com.tsts.listener.newshow.NewShowEventConsumer;
-import com.tsts.listener.newshow.NewShowService;
 import com.tsts.listener.notification.PushNotificationService;
+import com.tsts.listener.show.newshow.NewShowEvent;
+import com.tsts.listener.show.newshow.NewShowEventConsumer;
+import com.tsts.listener.show.newshow.NewShowService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 @EnableAutoConfiguration
 @SpringBootConfiguration
-@EnableBinding(NewShowEvent.class)
+@EnableBinding({NewShowEvent.class})
 public class ListenerApplication {
 
     public static void main (String[] args) {

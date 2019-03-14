@@ -1,8 +1,9 @@
-package com.tsts.listener.newshow;
+package com.tsts.listener.show.newshow;
 
+import com.tsts.listener.domain.Show;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
-import static com.tsts.listener.newshow.NewShowEvent.NEW_SHOW;
+import static com.tsts.listener.show.newshow.NewShowEvent.NEW_SHOW;
 
 public class NewShowEventConsumer {
 
