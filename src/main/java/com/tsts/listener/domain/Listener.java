@@ -15,17 +15,19 @@ public class Listener {
     private UUID id;
     private Name firstName;
     private Name lastName;
+    private PhoneNumber phoneNumber;
     private List<Category> favoriteCategories = new ArrayList<>();
 
     @JsonCreator
-    public Listener (UUID id, String firstName, String lastName) {
+    public Listener (UUID id, String firstName, String lastName, PhoneNumber phoneNumber) {
         this.id = id;
         this.firstName = new Name(firstName);
         this.lastName = new Name(lastName);
+        this.phoneNumber = phoneNumber;
     }
 
-    public Listener (UUID id, String firstName, String lastName, Category category) {
-        this(id, firstName, lastName);
+    public Listener (UUID id, String firstName, String lastName, Category category, PhoneNumber phoneNumber) {
+        this(id, firstName, lastName, phoneNumber);
         addFavoriteCategory(category);
     }
 
@@ -47,6 +49,10 @@ public class Listener {
 
     public String getLastName () {
         return lastName.get();
+    }
+
+    public String getPhoneNumber () {
+        return phoneNumber.get();
     }
 
     public List<Category> getFavoriteCategories () {
