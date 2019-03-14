@@ -2,6 +2,8 @@ package com.tsts.listener.show.liveshow;
 
 import org.springframework.cloud.stream.annotation.StreamListener;
 
+import javax.validation.Valid;
+
 import static com.tsts.listener.show.liveshow.LiveShowEvent.LIVE_SHOW;
 
 public class LiveShowEventConsumer {
@@ -13,7 +15,7 @@ public class LiveShowEventConsumer {
     }
 
     @StreamListener(LIVE_SHOW)
-    public void handleLiveShowEvent (LiveShow show) {
+    public void handleLiveShowEvent (@Valid LiveShow show) {
         liveShowService.handleLiveShowEvent(show);
     }
 }

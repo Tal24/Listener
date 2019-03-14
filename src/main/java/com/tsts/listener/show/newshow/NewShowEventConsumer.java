@@ -3,6 +3,8 @@ package com.tsts.listener.show.newshow;
 import com.tsts.listener.domain.Show;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
+import javax.validation.Valid;
+
 import static com.tsts.listener.show.newshow.NewShowEvent.NEW_SHOW;
 
 public class NewShowEventConsumer {
@@ -14,7 +16,7 @@ public class NewShowEventConsumer {
     }
 
     @StreamListener(NEW_SHOW)
-    public void handleNewShowEvent (Show show) {
+    public void handleNewShowEvent (@Valid Show show) {
         newShowService.handleNewShowEvent(show);
     }
 }

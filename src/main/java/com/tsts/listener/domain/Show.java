@@ -3,14 +3,15 @@ package com.tsts.listener.domain;
 import lombok.Value;
 import org.springframework.data.annotation.Id;
 
-import java.util.UUID;
+import javax.validation.constraints.NotNull;
 
 @Value
 public class Show {
 
     @Id
-    private UUID id;
+    @NotNull
     private Name name;
+    @NotNull
     private Category category;
     private boolean listenersTalks;
 
