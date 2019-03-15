@@ -1,5 +1,7 @@
 package com.tsts.listener.show.liveshow;
 
+import java.util.Optional;
+
 public class LiveShowService {
 
     private final LiveShowRepository liveShowRepository;
@@ -10,5 +12,9 @@ public class LiveShowService {
 
     public void handleLiveShowEvent (LiveShow show) {
         liveShowRepository.save(show);
+    }
+
+    public Optional<LiveShow> getLiveShow () {
+        return liveShowRepository.getLiveShow();
     }
 }

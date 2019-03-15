@@ -1,5 +1,6 @@
 package com.tsts.listener.show.liveshow;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.tsts.listener.domain.Name;
 import lombok.Value;
 import org.springframework.data.annotation.Id;
@@ -16,12 +17,10 @@ public class LiveShow {
     @NotNull
     private LocalDateTime endDate;
 
-    public String getName () {
-        return name.get();
-    }
-
-    public LocalDateTime getEndDate () {
-        return endDate;
+    @JsonCreator
+    public LiveShow (Name name, LocalDateTime endDate) {
+        this.name = name;
+        this.endDate = endDate;
     }
 
 }

@@ -39,20 +39,20 @@ public class Listener {
         return favoriteCategories.remove(category);
     }
 
-    public String getId () {
-        return id.toString();
+    public UUID getId () {
+        return id;
     }
 
-    public String getFirstName () {
-        return firstName.get();
+    public Name getFirstName () {
+        return firstName;
     }
 
-    public String getLastName () {
-        return lastName.get();
+    public Name getLastName () {
+        return lastName;
     }
 
-    public String getPhoneNumber () {
-        return phoneNumber.get();
+    public PhoneNumber getPhoneNumber () {
+        return phoneNumber;
     }
 
     public List<Category> getFavoriteCategories () {
