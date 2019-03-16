@@ -1,34 +1,48 @@
 package com.tsts.listener.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@EqualsAndHashCode
 public class Listener {
 
     @Id
+    @NotNull
     private UUID id;
+    @NotNull
     private Name firstName;
+    @NotNull
     private Name lastName;
+    @NotNull
     private PhoneNumber phoneNumber;
     private List<Category> favoriteCategories = new ArrayList<>();
 
-    @JsonCreator
-    public Listener (UUID id, String firstName, String lastName, PhoneNumber phoneNumber) {
+    @PersistenceConstructor
+    public Listener (UUID id, Name firstName, Name lastName, PhoneNumber phoneNumber) {
         this.id = id;
-        this.firstName = new Name(firstName);
-        this.lastName = new Name(lastName);
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
     }
 
-    public Listener (UUID id, String firstName, String lastName, Category category, PhoneNumber phoneNumber) {
-        this(id, firstName, lastName, phoneNumber);
-        addFavoriteCategory(category);
+    @JsonCreator
+    private Listener (@JsonProperty("id") String id, @JsonProperty("firstName") String firstName,
+                      @JsonProperty("lastName") String lastName, @JsonProperty("phoneNumber") String phoneNumber) {
+        this.id = UUID.fromString(id);
+        this.firstName = new Name(firstName);
+        this.lastName = new Name(lastName);
+        this.phoneNumber = new PhoneNumber(phoneNumber);
     }
 
     public boolean addFavoriteCategory (Category category) {
@@ -59,7 +73,8 @@ public class Listener {
         return Collections.unmodifiableList(favoriteCategories);
     }
 
+    @JsonIgnore
     public String getFullName () {
-        return MessageFormat.format("{0} {1}", getFirstName(), getLastName());
+        return MessageFormat.format("{0} {1}", getFirstName().get(), getLastName().get());
     }
 }

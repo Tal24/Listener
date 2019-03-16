@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
+
 @Controller
 public class ListenerDetailsController {
 
@@ -16,7 +18,7 @@ public class ListenerDetailsController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<Listener> registerListener (@RequestBody Listener listener) {
+    public ResponseEntity<Listener> registerListener (@Valid @RequestBody Listener listener) {
         return ResponseEntity.ok(listenerRegistrationService.register(listener));
     }
 

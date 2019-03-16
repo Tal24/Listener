@@ -1,9 +1,15 @@
 package com.tsts.listener.show.liveshow;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.tsts.listener.domain.Name;
 import lombok.Value;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -15,11 +21,19 @@ public class LiveShow {
     @NotNull
     private Name name;
     @NotNull
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime endDate;
 
-    @JsonCreator
+    @PersistenceConstructor
     public LiveShow (Name name, LocalDateTime endDate) {
         this.name = name;
+        this.endDate = endDate;
+    }
+
+    @JsonCreator
+    private LiveShow (@JsonProperty("name") String name, @JsonProperty("endDate") LocalDateTime endDate) {
+        this.name = new Name(name);
         this.endDate = endDate;
     }
 
