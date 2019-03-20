@@ -1,23 +1,19 @@
 package com.tsts.listener.show.liveshow;
 
+import com.tsts.listener.BaseIT;
 import com.tsts.listener.domain.Name;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class LiveShowIT {
+public class LiveShowIT extends BaseIT {
 
     @Autowired
     private LiveShowEvent liveShowEvent;

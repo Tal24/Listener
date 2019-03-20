@@ -29,7 +29,7 @@ public class ListenerApplication {
 
     @Bean
     public ListenerDetailsController listenerDetailsController (ListenerDetailsRepository listenerDetailsRepository) {
-        return new ListenerDetailsController(listenerRegistrationService(listenerDetailsRepository));
+        return new ListenerDetailsController(listenerRegistrationService(listenerDetailsRepository), listenerDetailsService(listenerDetailsRepository));
     }
 
     @Bean
