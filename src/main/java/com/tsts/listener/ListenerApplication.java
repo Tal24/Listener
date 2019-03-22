@@ -1,5 +1,6 @@
 package com.tsts.listener;
 
+import com.tsts.listener.database.mongodb.configuration.MongoCustomConfiguration;
 import com.tsts.listener.listener.details.ListenerDetailsController;
 import com.tsts.listener.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.listener.details.ListenerDetailsService;
@@ -15,12 +16,14 @@ import com.tsts.listener.show.newshow.NewShowService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 
 @EnableAutoConfiguration
 @SpringBootConfiguration
 @EnableBinding({NewShowEvent.class, LiveShowEvent.class})
+@EnableConfigurationProperties(MongoCustomConfiguration.class)
 public class ListenerApplication {
 
     public static void main (String[] args) {
