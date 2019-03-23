@@ -27,6 +27,7 @@ public class Listener {
     @NotNull
     private PhoneNumber phoneNumber;
     private List<Category> favoriteCategories = new ArrayList<>();
+    private int suspendedPeriod;
 
     @PersistenceConstructor
     public Listener (UUID id, Name firstName, Name lastName, PhoneNumber phoneNumber) {
@@ -67,6 +68,15 @@ public class Listener {
 
     public PhoneNumber getPhoneNumber () {
         return phoneNumber;
+    }
+
+    public boolean isSuspended () { return suspendedPeriod == 0; }
+
+    public void setSuspendedPeriod (int suspendedPeriod) {
+        if (suspendedPeriod <= 0) {
+            throw new IllegalArgumentException("Suspended period must be greater than 0");
+        }
+        this.suspendedPeriod = suspendedPeriod;
     }
 
     public List<Category> getFavoriteCategories () {
