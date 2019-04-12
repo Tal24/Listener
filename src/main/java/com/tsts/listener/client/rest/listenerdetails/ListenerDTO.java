@@ -1,8 +1,7 @@
 package com.tsts.listener.client.rest.listenerdetails;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tsts.listener.domain.entity.Category;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -14,6 +13,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
 public class ListenerDTO {
 
     @NotNull
@@ -28,19 +28,6 @@ public class ListenerDTO {
     private List<Category> favoriteCategories;
     private boolean isSuspended;
     private int suspendedPeriod;
-
-    @JsonCreator
-    private ListenerDTO (@JsonProperty("id") @NotNull String id, @JsonProperty("firstName") @NotNull String firstName, @JsonProperty("lastName") @NotNull String lastName,
-                         @JsonProperty("phoneNumber") @NotNull String phoneNumber, @JsonProperty("favoriteCategories")
-                         List<Category> favoriteCategories, @JsonProperty("isSuspended") boolean isSuspended, @JsonProperty("suspendedPeriod") int suspendedPeriod) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.favoriteCategories = favoriteCategories;
-        this.isSuspended = isSuspended;
-        this.suspendedPeriod = suspendedPeriod;
-    }
 
     public static ListenerDTOBuilder builder (@NotNull String id, @NotNull String firstName, @NotNull String lastName, @NotNull String phoneNumber) {
         return new ListenerDTOBuilder(id, firstName, lastName, phoneNumber);
