@@ -1,9 +1,7 @@
 package com.tsts.listener.domain.listener.details;
 
 import com.tsts.listener.BaseIT;
-import com.tsts.listener.domain.entity.Listener;
-import com.tsts.listener.domain.entity.Name;
-import com.tsts.listener.domain.entity.PhoneNumber;
+import com.tsts.listener.client.rest.listenerdetails.ListenerDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +25,16 @@ public class ListenerDetailsIT extends BaseIT {
 
     @Test
     public void registerShouldSaveListenerDetailsSuccessfully () {
-        UUID id = UUID.randomUUID();
-        Listener listener = new Listener(id, new Name("John"), new Name("Red"), new PhoneNumber("0505-999999"));
+        String id = UUID.randomUUID().toString();
+        ListenerDTO listenerDTO = ListenerDTO.builder(id, "John", "Red", "0505-999999").build();
 
-        ResponseEntity<Listener> saveResponse = testRestTemplate.postForEntity("/register", listener, Listener.class);
-        ResponseEntity<Listener> getResponse = testRestTemplate.getForEntity(MessageFormat.format("/listener/{0}", id.toString()),
-                Listener.class);
+        ResponseEntity<ListenerDTO> saveResponse = testRestTemplate.postForEntity("/register", listenerDTO, ListenerDTO.class);
+        ResponseEntity<ListenerDTO> getResponse = testRestTemplate.getForEntity(MessageFormat.format("/listener/{0}", id), ListenerDTO.class);
 
         assertThat(saveResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(saveResponse.getBody()).isEqualTo(listener);
+        assertThat(saveResponse.getBody()).isEqualTo(listenerDTO);
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(getResponse.getBody()).isEqualTo(listener);
+        assertThat(getResponse.getBody()).isEqualTo(listenerDTO);
     }
 
 }

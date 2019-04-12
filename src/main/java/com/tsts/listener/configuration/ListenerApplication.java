@@ -1,18 +1,19 @@
 package com.tsts.listener.configuration;
 
+import com.tsts.listener.client.messaging.notification.NotificationsChannels;
+import com.tsts.listener.client.messaging.show.ShowChannels;
+import com.tsts.listener.client.messaging.show.liveshow.LiveShowEventConsumer;
+import com.tsts.listener.client.messaging.show.newshow.NewShowEventConsumer;
+import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsController;
+import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsMapper;
 import com.tsts.listener.configuration.database.mongodb.MongoCustomConfiguration;
-import com.tsts.listener.domain.details.ListenerDetailsController;
 import com.tsts.listener.domain.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.listener.details.ListenerRegistrationService;
-import com.tsts.listener.client.rest.messaging.NotificationsChannels;
 import com.tsts.listener.domain.notification.PushNotificationToListenersService;
-import com.tsts.listener.client.messaging.show.ShowChannels;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;
-import com.tsts.listener.domain.show.liveshow.LiveShowEventConsumer;
 import com.tsts.listener.domain.show.liveshow.LiveShowRepository;
 import com.tsts.listener.domain.show.liveshow.LiveShowService;
-import com.tsts.listener.domain.show.newshow.NewShowEventConsumer;
 import com.tsts.listener.domain.show.newshow.NewShowService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
@@ -20,11 +21,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @EnableAutoConfiguration
 @SpringBootConfiguration
 @EnableBinding({ShowChannels.class, NotificationsChannels.class})
 @EnableConfigurationProperties(MongoCustomConfiguration.class)
+@EnableMongoRepositories(basePackageClasses = {ListenerDetailsRepository.class, ShowDetailsRepository.class, LiveShowRepository.class})
 public class ListenerApplication {
 
     private final ListenerDetailsRepository listenerDetailsRepository;
@@ -48,7 +51,7 @@ public class ListenerApplication {
     @Bean
     public ListenerDetailsController listenerDetailsController () {
         return new ListenerDetailsController(listenerRegistrationService(),
-                listenerDetailsService());
+                listenerDetailsService(), listenerDetailsMapper());
     }
 
     @Bean
@@ -84,6 +87,11 @@ public class ListenerApplication {
     @Bean
     public PushNotificationToListenersService pushNotificationService () {
         return new PushNotificationToListenersService(notificationsChannels);
+    }
+
+    @Bean
+    public ListenerDetailsMapper listenerDetailsMapper() {
+        return new ListenerDetailsMapper();
     }
 
 }

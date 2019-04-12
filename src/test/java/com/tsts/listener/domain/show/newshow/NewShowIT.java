@@ -2,11 +2,11 @@ package com.tsts.listener.domain.show.newshow;
 
 import com.tsts.listener.BaseIT;
 import com.tsts.listener.TestUtils;
+import com.tsts.listener.client.messaging.notification.NotificationsChannels;
+import com.tsts.listener.client.messaging.show.ShowChannels;
 import com.tsts.listener.domain.entity.*;
 import com.tsts.listener.domain.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.domain.notification.NewShowListenerNotification;
-import com.tsts.listener.client.rest.messaging.NotificationsChannels;
-import com.tsts.listener.client.messaging.show.ShowChannels;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;
 import org.junit.Before;
 import org.junit.Test;

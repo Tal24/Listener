@@ -1,6 +1,6 @@
 package com.tsts.listener.domain.notification;
 
-import com.tsts.listener.client.messaging.channel.notification.NotificationsChannels;
+import com.tsts.listener.client.messaging.notification.NotificationsChannels;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
