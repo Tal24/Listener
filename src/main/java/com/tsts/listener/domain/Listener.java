@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @EqualsAndHashCode
+@ToString
 public class Listener {
 
     @Id
@@ -27,7 +29,7 @@ public class Listener {
     @NotNull
     private PhoneNumber phoneNumber;
     private List<Category> favoriteCategories = new ArrayList<>();
-    private int suspendedPeriod;
+    private Days suspendedPeriod;
 
     @PersistenceConstructor
     public Listener (UUID id, Name firstName, Name lastName, PhoneNumber phoneNumber) {
@@ -70,13 +72,21 @@ public class Listener {
         return phoneNumber;
     }
 
-    public boolean isSuspended () { return suspendedPeriod == 0; }
+    public Days getSuspendedPeriod () {
+        return suspendedPeriod;
+    }
 
-    public void setSuspendedPeriod (int suspendedPeriod) {
-        if (suspendedPeriod <= 0) {
+    public boolean isSuspended () { return suspendedPeriod.get() != 0; }
+
+    public void cancelSuspension () {
+        this.suspendedPeriod = new Days(0);
+    }
+
+    public void suspend (Days days) {
+        if (days.get() == 0) {
             throw new IllegalArgumentException("Suspended period must be greater than 0");
         }
-        this.suspendedPeriod = suspendedPeriod;
+        this.suspendedPeriod = days;
     }
 
     public List<Category> getFavoriteCategories () {

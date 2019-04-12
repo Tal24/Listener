@@ -3,24 +3,31 @@ package com.tsts.listener.show.newshow;
 import com.tsts.listener.domain.Listener;
 import com.tsts.listener.domain.Show;
 import com.tsts.listener.listener.details.ListenerDetailsService;
-import com.tsts.listener.notification.PushNotificationService;
+import com.tsts.listener.notification.NewShowListenerNotification;
+import com.tsts.listener.notification.PushNotificationToListenersService;
+import com.tsts.listener.show.details.ShowDetailsRepository;
 
 import java.util.List;
 
 public class NewShowService {
 
     private final ListenerDetailsService listenerDetailsService;
-    private final PushNotificationService pushNotificationService;
+    private final PushNotificationToListenersService pushNotificationToListenersService;
+    private final ShowDetailsRepository showDetailsRepository;
 
     public NewShowService (ListenerDetailsService listenerDetailsService,
-                           PushNotificationService pushNotificationService) {
+                           PushNotificationToListenersService pushNotificationToListenersService,
+                           ShowDetailsRepository showDetailsRepository) {
         this.listenerDetailsService = listenerDetailsService;
-        this.pushNotificationService = pushNotificationService;
+        this.pushNotificationToListenersService = pushNotificationToListenersService;
+        this.showDetailsRepository = showDetailsRepository;
     }
 
 
     public void handleNewShowEvent (Show show) {
+        showDetailsRepository.save(show);
         List<Listener> listeners = listenerDetailsService.getListenersByFavoriteCategory(show.getCategory());
-        pushNotificationService.notifyNewShow(show, listeners);
+        NewShowListenerNotification newShowListenerNotification = new NewShowListenerNotification(show, listeners);
+        pushNotificationToListenersService.notifyNewShow(newShowListenerNotification);
     }
 }

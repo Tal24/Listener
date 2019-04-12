@@ -5,12 +5,13 @@ import com.tsts.listener.listener.details.ListenerDetailsController;
 import com.tsts.listener.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.listener.details.ListenerDetailsService;
 import com.tsts.listener.listener.details.ListenerRegistrationService;
-import com.tsts.listener.notification.PushNotificationService;
-import com.tsts.listener.show.liveshow.LiveShowEvent;
+import com.tsts.listener.notification.NotificationsChannels;
+import com.tsts.listener.notification.PushNotificationToListenersService;
+import com.tsts.listener.show.ShowChannels;
+import com.tsts.listener.show.details.ShowDetailsRepository;
 import com.tsts.listener.show.liveshow.LiveShowEventConsumer;
 import com.tsts.listener.show.liveshow.LiveShowRepository;
 import com.tsts.listener.show.liveshow.LiveShowService;
-import com.tsts.listener.show.newshow.NewShowEvent;
 import com.tsts.listener.show.newshow.NewShowEventConsumer;
 import com.tsts.listener.show.newshow.NewShowService;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +23,7 @@ import org.springframework.context.annotation.Bean;
 
 @EnableAutoConfiguration
 @SpringBootConfiguration
-@EnableBinding({NewShowEvent.class, LiveShowEvent.class})
+@EnableBinding({ShowChannels.class, NotificationsChannels.class})
 @EnableConfigurationProperties(MongoCustomConfiguration.class)
 public class ListenerApplication {
 
@@ -32,7 +33,8 @@ public class ListenerApplication {
 
     @Bean
     public ListenerDetailsController listenerDetailsController (ListenerDetailsRepository listenerDetailsRepository) {
-        return new ListenerDetailsController(listenerRegistrationService(listenerDetailsRepository), listenerDetailsService(listenerDetailsRepository));
+        return new ListenerDetailsController(listenerRegistrationService(listenerDetailsRepository),
+                listenerDetailsService(listenerDetailsRepository));
     }
 
     @Bean
@@ -46,13 +48,17 @@ public class ListenerApplication {
     }
 
     @Bean
-    public NewShowEventConsumer newShowEventConsumer (ListenerDetailsRepository listenerDetailsRepository) {
-        return new NewShowEventConsumer(newShowService(listenerDetailsRepository));
+    public NewShowEventConsumer newShowEventConsumer (ListenerDetailsRepository listenerDetailsRepository,
+                                                      NotificationsChannels notificationsChannels, ShowDetailsRepository showDetailsRepository) {
+        return new NewShowEventConsumer(newShowService(listenerDetailsRepository, notificationsChannels, showDetailsRepository));
     }
 
     @Bean
-    public NewShowService newShowService (ListenerDetailsRepository listenerDetailsRepository) {
-        return new NewShowService(listenerDetailsService(listenerDetailsRepository), pushNotificationService());
+    public NewShowService newShowService (ListenerDetailsRepository listenerDetailsRepository,
+                                          NotificationsChannels notificationsChannels,
+                                          ShowDetailsRepository showDetailsRepository) {
+        return new NewShowService(listenerDetailsService(listenerDetailsRepository),
+                pushNotificationService(notificationsChannels), showDetailsRepository);
     }
 
     @Bean
@@ -66,8 +72,8 @@ public class ListenerApplication {
     }
 
     @Bean
-    public PushNotificationService pushNotificationService () {
-        return new PushNotificationService();
+    public PushNotificationToListenersService pushNotificationService (NotificationsChannels notificationsChannels) {
+        return new PushNotificationToListenersService(notificationsChannels);
     }
 
 }

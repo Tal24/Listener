@@ -6,35 +6,33 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.EqualsAndHashCode;
 
-import java.text.MessageFormat;
-
 @EqualsAndHashCode
-public class PhoneNumber {
+public class Days {
 
     @JsonValue
-    private String value;
+    private int value;
 
     @JsonCreator
-    public PhoneNumber (String value) {
+    public Days (int value) {
         set(value);
     }
 
     @JsonGetter("value")
-    public String get () {
+    public int get () {
         return value;
     }
 
     @JsonSetter("value")
-    public void set (String value) {
-        if (!value.matches("[-,0-9]+")) {
-            throw new IllegalArgumentException(MessageFormat.format("Invalid phone number - {0}, phone number should " +
-                    "only have numbers", value));
+    public void set (int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Number of days cannot be negative");
         }
         this.value = value;
     }
 
     @Override
     public String toString () {
-        return value;
+        return String.valueOf(value);
     }
+
 }

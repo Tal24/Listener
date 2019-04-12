@@ -1,13 +1,16 @@
-package com.tsts.listener.show.liveshow;
+package com.tsts.listener.show;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface LiveShowEvent {
+public interface ShowChannels {
 
+    String NEW_SHOW = "new-show";
     String LIVE_SHOW = "live-show";
+
+    @Input(NEW_SHOW)
+    SubscribableChannel newShow();
 
     @Input(LIVE_SHOW)
     SubscribableChannel liveShow();
-
 }

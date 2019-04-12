@@ -2,6 +2,7 @@ package com.tsts.listener.show.liveshow;
 
 import com.tsts.listener.BaseIT;
 import com.tsts.listener.domain.Name;
+import com.tsts.listener.show.ShowChannels;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LiveShowIT extends BaseIT {
 
     @Autowired
-    private LiveShowEvent liveShowEvent;
+    private ShowChannels showChannels;
 
     @Autowired
     private LiveShowRepository liveShowRepository;
@@ -34,7 +35,7 @@ public class LiveShowIT extends BaseIT {
         Message<LiveShow> liveShowMessage = MessageBuilder.withPayload(liveShow).build();
 
         // act
-        liveShowEvent.liveShow().send(liveShowMessage);
+        showChannels.liveShow().send(liveShowMessage);
 
         // assert
         assertThat(liveShowRepository.findById(showName)).isEqualTo(Optional.of(liveShow));
