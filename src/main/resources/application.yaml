@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        new-show:
+          group: listener
+        live-show:
+          group: listener
+      kafka:
+        bindings:
+          new-show-listener-notification:
+            producer:
+              configuration:
+                enable.idempotence: true
+                retries: 5
+                max.in.flight.requests.per.connection: 1
+                acks: all
+  data:
+    mongodb:
+      socketTimeout: 10000
