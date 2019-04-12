@@ -6,7 +6,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 
 import javax.validation.Valid;
 
-import static com.tsts.listener.client.messaging.channel.ShowChannels.NEW_SHOW;
+import static com.tsts.listener.client.messaging.show.ShowChannels.NEW_SHOW;
 
 public class NewShowEventConsumer {
 

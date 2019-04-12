@@ -2,12 +2,12 @@ package com.tsts.listener.configuration;
 
 import com.tsts.listener.configuration.database.mongodb.MongoCustomConfiguration;
 import com.tsts.listener.domain.details.ListenerDetailsController;
-import com.tsts.listener.domain.details.ListenerDetailsRepository;
-import com.tsts.listener.domain.details.ListenerDetailsService;
-import com.tsts.listener.domain.details.ListenerRegistrationService;
+import com.tsts.listener.domain.listener.details.ListenerDetailsRepository;
+import com.tsts.listener.domain.listener.details.ListenerDetailsService;
+import com.tsts.listener.domain.listener.details.ListenerRegistrationService;
 import com.tsts.listener.client.rest.messaging.NotificationsChannels;
 import com.tsts.listener.domain.notification.PushNotificationToListenersService;
-import com.tsts.listener.client.messaging.channel.ShowChannels;
+import com.tsts.listener.client.messaging.show.ShowChannels;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;
 import com.tsts.listener.domain.show.liveshow.LiveShowEventConsumer;
 import com.tsts.listener.domain.show.liveshow.LiveShowRepository;

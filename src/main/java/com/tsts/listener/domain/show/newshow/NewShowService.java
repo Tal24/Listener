@@ -2,7 +2,7 @@ package com.tsts.listener.domain.show.newshow;
 
 import com.tsts.listener.domain.entity.Listener;
 import com.tsts.listener.domain.entity.Show;
-import com.tsts.listener.domain.details.ListenerDetailsService;
+import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.notification.NewShowListenerNotification;
 import com.tsts.listener.domain.notification.PushNotificationToListenersService;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;

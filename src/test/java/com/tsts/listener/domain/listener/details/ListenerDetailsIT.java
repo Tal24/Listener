@@ -1,4 +1,4 @@
-package com.tsts.listener.domain.details;
+package com.tsts.listener.domain.listener.details;
 
 import com.tsts.listener.BaseIT;
 import com.tsts.listener.domain.entity.Listener;

@@ -2,7 +2,7 @@ package com.tsts.listener.domain.show.liveshow;
 
 import com.tsts.listener.BaseIT;
 import com.tsts.listener.domain.entity.Name;
-import com.tsts.listener.client.messaging.channel.ShowChannels;
+import com.tsts.listener.client.messaging.show.ShowChannels;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

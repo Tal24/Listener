@@ -1,4 +1,4 @@
-package com.tsts.listener.client.messaging.channel;
+package com.tsts.listener.client.messaging.notification;
 
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;

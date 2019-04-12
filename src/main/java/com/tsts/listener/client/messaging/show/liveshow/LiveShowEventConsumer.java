@@ -6,7 +6,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 
 import javax.validation.Valid;
 
-import static com.tsts.listener.client.messaging.channel.ShowChannels.LIVE_SHOW;
+import static com.tsts.listener.client.messaging.show.ShowChannels.LIVE_SHOW;
 
 public class LiveShowEventConsumer {
 

@@ -1,4 +1,4 @@
-package com.tsts.listener.client.messaging.channel;
+package com.tsts.listener.client.messaging.show;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
