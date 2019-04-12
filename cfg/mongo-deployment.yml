@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    app: listener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: listener
+  template:
+    metadata:
+      labels:
+        app: listener
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:4.0.6
+          ports:
+            - containerPort: 27017

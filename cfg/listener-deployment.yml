@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: listener-deployment
+  labels:
+    app: listener
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: listener
+  template:
+    metadata:
+      labels:
+        app: listener
+    spec:
+      containers:
+        - name: listener
+          image: 2450/listener:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 80
