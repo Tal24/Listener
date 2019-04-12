@@ -2,11 +2,13 @@ package com.tsts.listener.domain.show.newshow;
 
 import com.tsts.listener.BaseIT;
 import com.tsts.listener.TestUtils;
+import com.tsts.listener.client.messaging.notification.NewShowListenerNotificationDTO;
 import com.tsts.listener.client.messaging.notification.NotificationsChannels;
 import com.tsts.listener.client.messaging.show.ShowChannels;
+import com.tsts.listener.client.messaging.show.ShowDTO;
+import com.tsts.listener.client.rest.listenerdetails.ListenerDTO;
 import com.tsts.listener.domain.entity.*;
 import com.tsts.listener.domain.listener.details.ListenerDetailsRepository;
-import com.tsts.listener.domain.notification.NewShowListenerNotification;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,23 +49,27 @@ public class NewShowIT extends BaseIT {
     @Test
     public void shouldSaveShowDetailsAndSendNotificationsToListenersWhenNewShowEventReceived () throws Exception {
         // arrange
-        Listener sportsListener = new Listener(UUID.randomUUID(), new Name("John"), new Name("Red"), new PhoneNumber("0505-999999"));
+        UUID sportsListenerId = UUID.randomUUID();
+        Listener sportsListener = new Listener(sportsListenerId, new Name("John"), new Name("Red"), new PhoneNumber("0505-999999"));
         sportsListener.addFavoriteCategory(Category.SPORTS);
         Listener newsListener = new Listener(UUID.randomUUID(), new Name("Ted"), new Name("Son"), new PhoneNumber("0505-111111"));
-        sportsListener.addFavoriteCategory(Category.NEWS);
+        newsListener.addFavoriteCategory(Category.NEWS);
         listenerDetailsRepository.saveAll(Arrays.asList(sportsListener, newsListener));
 
         Name newShowName = new Name("SportsCenter");
-        Show newShow = new Show(newShowName, Category.SPORTS, false);
-        Message<Show> newShowEventMessage = MessageBuilder.withPayload(newShow).build();
+        ShowDTO newShowDTO = ShowDTO.builder(newShowName.get(), Category.SPORTS).listenersAllowedToCall(false).build();
+        Message<ShowDTO> newShowEventMessage = MessageBuilder.withPayload(newShowDTO).build();
+
+        Show expectedSavedShow = new Show(newShowName, Category.SPORTS, false);
+        ListenerDTO sportsListenerDTO = ListenerDTO.builder(sportsListenerId.toString(), "John", "Red", "0505-999999").favoriteCategories(Collections.singletonList(Category.SPORTS)).build();
 
         // act
         showChannels.newShow().send(newShowEventMessage);
 
         // assert
-        assertThat(showDetailsRepository.findById(newShowName)).isEqualTo(Optional.of(newShow));
-        NewShowListenerNotification expectedNotification = new NewShowListenerNotification(newShow, Collections.singletonList(sportsListener));
-        NewShowListenerNotification actualNotification = TestUtils.getMessagePayload(messageCollector, notificationsChannels.newShowNotificationToListeners(), NewShowListenerNotification.class);
+        assertThat(showDetailsRepository.findById(newShowName)).isEqualTo(Optional.of(expectedSavedShow));
+        NewShowListenerNotificationDTO expectedNotification = new NewShowListenerNotificationDTO(newShowDTO, Collections.singletonList(sportsListenerDTO));
+        NewShowListenerNotificationDTO actualNotification = TestUtils.getMessagePayload(messageCollector, notificationsChannels.newShowNotificationToListeners(), NewShowListenerNotificationDTO.class);
         assertThat(actualNotification).isEqualTo(expectedNotification);
     }
 

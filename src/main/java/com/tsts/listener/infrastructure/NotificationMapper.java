@@ -1,0 +1,21 @@
+package com.tsts.listener.infrastructure;
+
+import com.tsts.listener.client.messaging.notification.NewShowListenerNotificationDTO;
+import com.tsts.listener.client.messaging.show.ShowMapper;
+import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsMapper;
+import com.tsts.listener.domain.notification.NewShowListenerNotification;
+
+public class NotificationMapper {
+
+    private final ShowMapper showMapper;
+    private final ListenerDetailsMapper listenerDetailsMapper;
+
+    public NotificationMapper (ShowMapper showMapper, ListenerDetailsMapper listenerDetailsMapper) {
+        this.showMapper = showMapper;
+        this.listenerDetailsMapper = listenerDetailsMapper;
+    }
+
+    public NewShowListenerNotificationDTO mapToNewShowListenerNotificationDTO (NewShowListenerNotification newShowListenerNotification) {
+        return new NewShowListenerNotificationDTO(showMapper.mapToShowDTO(newShowListenerNotification.getShow()), listenerDetailsMapper.mapToListenerDTOs(newShowListenerNotification.getListeners()));
+    }
+}

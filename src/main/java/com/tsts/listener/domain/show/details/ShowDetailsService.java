@@ -13,7 +13,7 @@ public class ShowDetailsService {
 
     public boolean allowsListenersTalk (Name showName) {
         Show show = showDetailsRepository.findById(showName).orElseThrow(() -> new ShowNotFoundException(showName.get()));
-        return show.listenersAllowedToCall();
+        return show.isListenersAllowedToCall();
     }
 
 }

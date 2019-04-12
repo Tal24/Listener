@@ -9,20 +9,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Days {
 
-    @JsonValue
     private int value;
 
-    @JsonCreator
     public Days (int value) {
         set(value);
     }
 
-    @JsonGetter("value")
     public int get () {
         return value;
     }
 
-    @JsonSetter("value")
     public void set (int value) {
         if (value < 0) {
             throw new IllegalArgumentException("Number of days cannot be negative");

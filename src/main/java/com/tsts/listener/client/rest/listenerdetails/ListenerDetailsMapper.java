@@ -5,7 +5,9 @@ import com.tsts.listener.domain.entity.Listener;
 import com.tsts.listener.domain.entity.Name;
 import com.tsts.listener.domain.entity.PhoneNumber;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ListenerDetailsMapper {
 
@@ -22,5 +24,9 @@ public class ListenerDetailsMapper {
     public ListenerDTO mapToListenerDTO (Listener listener) {
         return ListenerDTO.builder(listener.getId().toString(), listener.getFirstName().get(), listener.getLastName().get(),
                 listener.getPhoneNumber().get()).favoriteCategories(listener.getFavoriteCategories()).suspendedPeriod(listener.getSuspendedPeriod().get()).build();
+    }
+
+    public List<ListenerDTO> mapToListenerDTOs (List<Listener> listeners) {
+        return listeners.stream().map(this::mapToListenerDTO).collect(Collectors.toList());
     }
 }

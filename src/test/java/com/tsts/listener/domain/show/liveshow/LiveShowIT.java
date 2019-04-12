@@ -1,6 +1,7 @@
 package com.tsts.listener.domain.show.liveshow;
 
 import com.tsts.listener.BaseIT;
+import com.tsts.listener.client.messaging.show.liveshow.LiveShowDTO;
 import com.tsts.listener.domain.entity.Name;
 import com.tsts.listener.client.messaging.show.ShowChannels;
 import org.junit.Before;
@@ -31,13 +32,15 @@ public class LiveShowIT extends BaseIT {
     public void shouldSaveLiveShowWhenLiveShowEventReceived () {
         // arrange
         Name showName = new Name("SportsCenter");
-        LiveShow liveShow = new LiveShow(showName, LocalDateTime.of(2020, 1, 1, 12, 0));
-        Message<LiveShow> liveShowMessage = MessageBuilder.withPayload(liveShow).build();
+        LiveShowDTO liveShowDTO = new LiveShowDTO(showName.get(), LocalDateTime.of(2020, 1, 1, 12, 0));
+        Message<LiveShowDTO> liveShowMessage = MessageBuilder.withPayload(liveShowDTO).build();
+
+        LiveShow expectedLiveShow = new LiveShow(showName, LocalDateTime.of(2020, 1, 1, 12, 0));
 
         // act
         showChannels.liveShow().send(liveShowMessage);
 
         // assert
-        assertThat(liveShowRepository.findById(showName)).isEqualTo(Optional.of(liveShow));
+        assertThat(liveShowRepository.findById(showName)).isEqualTo(Optional.of(expectedLiveShow));
     }
 }

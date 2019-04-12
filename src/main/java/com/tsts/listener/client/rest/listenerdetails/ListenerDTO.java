@@ -1,5 +1,7 @@
 package com.tsts.listener.client.rest.listenerdetails;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tsts.listener.domain.entity.Category;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,8 +29,10 @@ public class ListenerDTO {
     private boolean isSuspended;
     private int suspendedPeriod;
 
-    private ListenerDTO (@NotNull String id, @NotNull String firstName, @NotNull String lastName, @NotNull String phoneNumber,
-                 List<Category> favoriteCategories, boolean isSuspended, int suspendedPeriod) {
+    @JsonCreator
+    private ListenerDTO (@JsonProperty("id") @NotNull String id, @JsonProperty("firstName") @NotNull String firstName, @JsonProperty("lastName") @NotNull String lastName,
+                         @JsonProperty("phoneNumber") @NotNull String phoneNumber, @JsonProperty("favoriteCategories")
+                         List<Category> favoriteCategories, @JsonProperty("isSuspended") boolean isSuspended, @JsonProperty("suspendedPeriod") int suspendedPeriod) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

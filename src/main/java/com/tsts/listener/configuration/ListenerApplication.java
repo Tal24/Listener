@@ -2,7 +2,9 @@ package com.tsts.listener.configuration;
 
 import com.tsts.listener.client.messaging.notification.NotificationsChannels;
 import com.tsts.listener.client.messaging.show.ShowChannels;
+import com.tsts.listener.client.messaging.show.ShowMapper;
 import com.tsts.listener.client.messaging.show.liveshow.LiveShowEventConsumer;
+import com.tsts.listener.client.messaging.show.liveshow.LiveShowMapper;
 import com.tsts.listener.client.messaging.show.newshow.NewShowEventConsumer;
 import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsController;
 import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsMapper;
@@ -10,7 +12,8 @@ import com.tsts.listener.configuration.database.mongodb.MongoCustomConfiguration
 import com.tsts.listener.domain.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.listener.details.ListenerRegistrationService;
-import com.tsts.listener.domain.notification.PushNotificationToListenersService;
+import com.tsts.listener.infrastructure.NotificationMapper;
+import com.tsts.listener.infrastructure.NotificationToListenersEventProducer;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;
 import com.tsts.listener.domain.show.liveshow.LiveShowRepository;
 import com.tsts.listener.domain.show.liveshow.LiveShowService;
@@ -66,7 +69,7 @@ public class ListenerApplication {
 
     @Bean
     public NewShowEventConsumer newShowEventConsumer () {
-        return new NewShowEventConsumer(newShowService());
+        return new NewShowEventConsumer(newShowService(), showMapper());
     }
 
     @Bean
@@ -76,7 +79,7 @@ public class ListenerApplication {
 
     @Bean
     public LiveShowEventConsumer liveShowEventConsumer () {
-        return new LiveShowEventConsumer(liveShowService());
+        return new LiveShowEventConsumer(liveShowService(), liveShowMapper());
     }
 
     @Bean
@@ -85,13 +88,28 @@ public class ListenerApplication {
     }
 
     @Bean
-    public PushNotificationToListenersService pushNotificationService () {
-        return new PushNotificationToListenersService(notificationsChannels);
+    public NotificationToListenersEventProducer pushNotificationService () {
+        return new NotificationToListenersEventProducer(notificationsChannels, notificationMapper());
     }
 
     @Bean
     public ListenerDetailsMapper listenerDetailsMapper() {
         return new ListenerDetailsMapper();
+    }
+
+    @Bean
+    public LiveShowMapper liveShowMapper () {
+        return new LiveShowMapper();
+    }
+
+    @Bean
+    public ShowMapper showMapper () {
+        return new ShowMapper();
+    }
+
+    @Bean
+    public NotificationMapper notificationMapper () {
+        return new NotificationMapper(showMapper(), listenerDetailsMapper());
     }
 
 }

@@ -4,7 +4,7 @@ import com.tsts.listener.domain.entity.Listener;
 import com.tsts.listener.domain.entity.Show;
 import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.notification.NewShowListenerNotification;
-import com.tsts.listener.domain.notification.PushNotificationToListenersService;
+import com.tsts.listener.infrastructure.NotificationToListenersEventProducer;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;
 
 import java.util.List;
@@ -12,14 +12,14 @@ import java.util.List;
 public class NewShowService {
 
     private final ListenerDetailsService listenerDetailsService;
-    private final PushNotificationToListenersService pushNotificationToListenersService;
+    private final NotificationToListenersEventProducer notificationToListenersEventProducer;
     private final ShowDetailsRepository showDetailsRepository;
 
     public NewShowService (ListenerDetailsService listenerDetailsService,
-                           PushNotificationToListenersService pushNotificationToListenersService,
+                           NotificationToListenersEventProducer notificationToListenersEventProducer,
                            ShowDetailsRepository showDetailsRepository) {
         this.listenerDetailsService = listenerDetailsService;
-        this.pushNotificationToListenersService = pushNotificationToListenersService;
+        this.notificationToListenersEventProducer = notificationToListenersEventProducer;
         this.showDetailsRepository = showDetailsRepository;
     }
 
@@ -28,6 +28,6 @@ public class NewShowService {
         showDetailsRepository.save(show);
         List<Listener> listeners = listenerDetailsService.getListenersByFavoriteCategory(show.getCategory());
         NewShowListenerNotification newShowListenerNotification = new NewShowListenerNotification(show, listeners);
-        pushNotificationToListenersService.notifyNewShow(newShowListenerNotification);
+        notificationToListenersEventProducer.notifyNewShow(newShowListenerNotification);
     }
 }

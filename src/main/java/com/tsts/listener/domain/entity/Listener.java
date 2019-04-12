@@ -15,13 +15,9 @@ import java.util.UUID;
 public class Listener {
 
     @Id
-    @NotNull
     private UUID id;
-    @NotNull
     private Name firstName;
-    @NotNull
     private Name lastName;
-    @NotNull
     private PhoneNumber phoneNumber;
     private List<Category> favoriteCategories = new ArrayList<>();
     private Days suspendedPeriod = new Days(0);
