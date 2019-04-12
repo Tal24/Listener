@@ -27,52 +27,62 @@ import org.springframework.context.annotation.Bean;
 @EnableConfigurationProperties(MongoCustomConfiguration.class)
 public class ListenerApplication {
 
+    private final ListenerDetailsRepository listenerDetailsRepository;
+    private final ShowDetailsRepository showDetailsRepository;
+    private final LiveShowRepository liveShowRepository;
+    private final NotificationsChannels notificationsChannels;
+
+    public ListenerApplication (ListenerDetailsRepository listenerDetailsRepository,
+                                ShowDetailsRepository showDetailsRepository, LiveShowRepository liveShowRepository,
+                                NotificationsChannels notificationsChannels) {
+        this.listenerDetailsRepository = listenerDetailsRepository;
+        this.showDetailsRepository = showDetailsRepository;
+        this.liveShowRepository = liveShowRepository;
+        this.notificationsChannels = notificationsChannels;
+    }
+
     public static void main (String[] args) {
         SpringApplication.run(ListenerApplication.class, args);
     }
 
     @Bean
-    public ListenerDetailsController listenerDetailsController (ListenerDetailsRepository listenerDetailsRepository) {
-        return new ListenerDetailsController(listenerRegistrationService(listenerDetailsRepository),
-                listenerDetailsService(listenerDetailsRepository));
+    public ListenerDetailsController listenerDetailsController () {
+        return new ListenerDetailsController(listenerRegistrationService(),
+                listenerDetailsService());
     }
 
     @Bean
-    public ListenerRegistrationService listenerRegistrationService (ListenerDetailsRepository listenerDetailsRepository) {
+    public ListenerRegistrationService listenerRegistrationService () {
         return new ListenerRegistrationService(listenerDetailsRepository);
     }
 
     @Bean
-    public ListenerDetailsService listenerDetailsService (ListenerDetailsRepository listenerDetailsRepository) {
+    public ListenerDetailsService listenerDetailsService () {
         return new ListenerDetailsService(listenerDetailsRepository);
     }
 
     @Bean
-    public NewShowEventConsumer newShowEventConsumer (ListenerDetailsRepository listenerDetailsRepository,
-                                                      NotificationsChannels notificationsChannels, ShowDetailsRepository showDetailsRepository) {
-        return new NewShowEventConsumer(newShowService(listenerDetailsRepository, notificationsChannels, showDetailsRepository));
+    public NewShowEventConsumer newShowEventConsumer () {
+        return new NewShowEventConsumer(newShowService());
     }
 
     @Bean
-    public NewShowService newShowService (ListenerDetailsRepository listenerDetailsRepository,
-                                          NotificationsChannels notificationsChannels,
-                                          ShowDetailsRepository showDetailsRepository) {
-        return new NewShowService(listenerDetailsService(listenerDetailsRepository),
-                pushNotificationService(notificationsChannels), showDetailsRepository);
+    public NewShowService newShowService () {
+        return new NewShowService(listenerDetailsService(), pushNotificationService(), showDetailsRepository);
     }
 
     @Bean
-    public LiveShowEventConsumer liveShowEventConsumer (LiveShowRepository liveShowRepository) {
-        return new LiveShowEventConsumer(liveShowService(liveShowRepository));
+    public LiveShowEventConsumer liveShowEventConsumer () {
+        return new LiveShowEventConsumer(liveShowService());
     }
 
     @Bean
-    public LiveShowService liveShowService (LiveShowRepository liveShowRepository) {
+    public LiveShowService liveShowService () {
         return new LiveShowService(liveShowRepository);
     }
 
     @Bean
-    public PushNotificationToListenersService pushNotificationService (NotificationsChannels notificationsChannels) {
+    public PushNotificationToListenersService pushNotificationService () {
         return new PushNotificationToListenersService(notificationsChannels);
     }
 
