@@ -1,7 +1,7 @@
 package com.tsts.listener.domain.listener.details;
 
 import com.tsts.listener.BaseIT;
-import com.tsts.listener.client.rest.listenerdetails.ListenerDTO;
+import com.tsts.listener.dto.listenerdetails.ListenerDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

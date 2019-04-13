@@ -1,4 +1,4 @@
-package com.tsts.listener.client.rest.listenerdetails;
+package com.tsts.listener.dto.listenerdetails;
 
 import com.tsts.listener.domain.entity.Category;
 import lombok.AllArgsConstructor;

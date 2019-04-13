@@ -1,4 +1,4 @@
-package com.tsts.listener.client.messaging.show;
+package com.tsts.listener.dto.show;
 
 import com.tsts.listener.domain.entity.Category;
 import lombok.AllArgsConstructor;

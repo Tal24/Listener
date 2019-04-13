@@ -3,6 +3,8 @@ package com.tsts.listener.client.rest.listenerdetails;
 import com.tsts.listener.domain.entity.Listener;
 import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.listener.details.ListenerRegistrationService;
+import com.tsts.listener.dto.listenerdetails.ListenerDTO;
+import com.tsts.listener.mapper.listenerdetails.ListenerDetailsMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

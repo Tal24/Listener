@@ -1,9 +1,9 @@
 package com.tsts.listener.infrastructure;
 
-import com.tsts.listener.client.messaging.notification.NewShowListenerNotificationDTO;
-import com.tsts.listener.client.messaging.show.ShowMapper;
-import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsMapper;
 import com.tsts.listener.domain.notification.NewShowListenerNotification;
+import com.tsts.listener.dto.notification.NewShowListenerNotificationDTO;
+import com.tsts.listener.mapper.listenerdetails.ListenerDetailsMapper;
+import com.tsts.listener.mapper.show.ShowMapper;
 
 public class NotificationMapper {
 

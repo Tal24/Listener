@@ -1,13 +1,13 @@
 package com.tsts.listener.client.messaging.show.newshow;
 
-import com.tsts.listener.client.messaging.show.ShowDTO;
-import com.tsts.listener.client.messaging.show.ShowMapper;
 import com.tsts.listener.domain.show.newshow.NewShowService;
+import com.tsts.listener.dto.show.ShowDTO;
+import com.tsts.listener.mapper.show.ShowMapper;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 import javax.validation.Valid;
 
-import static com.tsts.listener.client.messaging.show.ShowChannels.NEW_SHOW;
+import static com.tsts.listener.configuration.messaging.channels.ShowChannels.NEW_SHOW;
 
 public class NewShowEventConsumer {
 

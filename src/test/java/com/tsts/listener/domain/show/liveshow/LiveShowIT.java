@@ -1,9 +1,9 @@
 package com.tsts.listener.domain.show.liveshow;
 
 import com.tsts.listener.BaseIT;
-import com.tsts.listener.client.messaging.show.liveshow.LiveShowDTO;
+import com.tsts.listener.configuration.messaging.channels.ShowChannels;
 import com.tsts.listener.domain.entity.Name;
-import com.tsts.listener.client.messaging.show.ShowChannels;
+import com.tsts.listener.dto.show.liveshow.LiveShowDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

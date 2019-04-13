@@ -1,14 +1,11 @@
 package com.tsts.listener.configuration;
 
-import com.tsts.listener.client.messaging.notification.NotificationsChannels;
-import com.tsts.listener.client.messaging.show.ShowChannels;
-import com.tsts.listener.client.messaging.show.ShowMapper;
 import com.tsts.listener.client.messaging.show.liveshow.LiveShowEventConsumer;
-import com.tsts.listener.client.messaging.show.liveshow.LiveShowMapper;
 import com.tsts.listener.client.messaging.show.newshow.NewShowEventConsumer;
 import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsController;
-import com.tsts.listener.client.rest.listenerdetails.ListenerDetailsMapper;
 import com.tsts.listener.configuration.database.mongodb.MongoCustomConfiguration;
+import com.tsts.listener.configuration.messaging.channels.NotificationsChannels;
+import com.tsts.listener.configuration.messaging.channels.ShowChannels;
 import com.tsts.listener.domain.listener.details.ListenerDetailsRepository;
 import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.listener.details.ListenerRegistrationService;
@@ -18,6 +15,9 @@ import com.tsts.listener.domain.show.liveshow.LiveShowService;
 import com.tsts.listener.domain.show.newshow.NewShowService;
 import com.tsts.listener.infrastructure.NotificationMapper;
 import com.tsts.listener.infrastructure.NotificationToListenersEventProducer;
+import com.tsts.listener.mapper.listenerdetails.ListenerDetailsMapper;
+import com.tsts.listener.mapper.show.ShowMapper;
+import com.tsts.listener.mapper.show.liveshow.LiveShowMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

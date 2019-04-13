@@ -1,7 +1,8 @@
-package com.tsts.listener.client.messaging.show.liveshow;
+package com.tsts.listener.mapper.show.liveshow;
 
 import com.tsts.listener.domain.entity.Name;
 import com.tsts.listener.domain.show.liveshow.LiveShow;
+import com.tsts.listener.dto.show.liveshow.LiveShowDTO;
 
 public class LiveShowMapper {
 

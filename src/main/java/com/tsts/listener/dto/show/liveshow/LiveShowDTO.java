@@ -1,4 +1,4 @@
-package com.tsts.listener.client.messaging.show.liveshow;
+package com.tsts.listener.dto.show.liveshow;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

@@ -1,7 +1,8 @@
-package com.tsts.listener.client.messaging.show;
+package com.tsts.listener.mapper.show;
 
 import com.tsts.listener.domain.entity.Name;
 import com.tsts.listener.domain.entity.Show;
+import com.tsts.listener.dto.show.ShowDTO;
 
 public class ShowMapper {
 

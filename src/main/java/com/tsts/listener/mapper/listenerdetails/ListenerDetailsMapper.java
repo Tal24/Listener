@@ -1,9 +1,10 @@
-package com.tsts.listener.client.rest.listenerdetails;
+package com.tsts.listener.mapper.listenerdetails;
 
 import com.tsts.listener.domain.entity.Days;
 import com.tsts.listener.domain.entity.Listener;
 import com.tsts.listener.domain.entity.Name;
 import com.tsts.listener.domain.entity.PhoneNumber;
+import com.tsts.listener.dto.listenerdetails.ListenerDTO;
 
 import java.util.List;
 import java.util.UUID;

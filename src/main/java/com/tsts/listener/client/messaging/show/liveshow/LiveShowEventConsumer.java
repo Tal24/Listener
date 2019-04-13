@@ -1,11 +1,13 @@
 package com.tsts.listener.client.messaging.show.liveshow;
 
 import com.tsts.listener.domain.show.liveshow.LiveShowService;
+import com.tsts.listener.dto.show.liveshow.LiveShowDTO;
+import com.tsts.listener.mapper.show.liveshow.LiveShowMapper;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 import javax.validation.Valid;
 
-import static com.tsts.listener.client.messaging.show.ShowChannels.LIVE_SHOW;
+import static com.tsts.listener.configuration.messaging.channels.ShowChannels.LIVE_SHOW;
 
 public class LiveShowEventConsumer {
 
