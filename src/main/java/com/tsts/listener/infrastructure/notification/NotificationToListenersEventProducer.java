@@ -1,8 +1,9 @@
-package com.tsts.listener.infrastructure;
+package com.tsts.listener.infrastructure.notification;
 
 import com.tsts.listener.configuration.messaging.channels.NotificationsChannels;
 import com.tsts.listener.domain.notification.NewShowListenerNotification;
 import com.tsts.listener.dto.notification.NewShowListenerNotificationDTO;
+import com.tsts.listener.mapper.notification.NotificationMapper;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 

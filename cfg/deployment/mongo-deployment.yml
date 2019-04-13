@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-deployment
+  name: mongo
   labels:
-    app: listener
+    app: mongo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: listener
+      app: mongo
   template:
     metadata:
       labels:
-        app: listener
+        app: mongo
     spec:
       containers:
         - name: mongo

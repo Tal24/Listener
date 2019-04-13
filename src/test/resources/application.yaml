@@ -8,7 +8,7 @@ spring:
           group: listener
       kafka:
         binder:
-          brokers: kafka
+          brokers: localhost
         bindings:
           new-show-listener-notification:
             producer:
@@ -19,5 +19,5 @@ spring:
                 acks: all
   data:
     mongodb:
-      host: mongo
+      host: localhost
       socketTimeout: 10000

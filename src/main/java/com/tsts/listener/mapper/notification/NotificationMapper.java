@@ -1,4 +1,4 @@
-package com.tsts.listener.infrastructure;
+package com.tsts.listener.mapper.notification;
 
 import com.tsts.listener.domain.notification.NewShowListenerNotification;
 import com.tsts.listener.dto.notification.NewShowListenerNotificationDTO;

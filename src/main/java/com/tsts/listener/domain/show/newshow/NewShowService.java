@@ -4,8 +4,8 @@ import com.tsts.listener.domain.entity.Listener;
 import com.tsts.listener.domain.entity.Show;
 import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.notification.NewShowListenerNotification;
-import com.tsts.listener.infrastructure.NotificationToListenersEventProducer;
 import com.tsts.listener.domain.show.details.ShowDetailsRepository;
+import com.tsts.listener.infrastructure.notification.NotificationToListenersEventProducer;
 
 import java.util.List;
 
