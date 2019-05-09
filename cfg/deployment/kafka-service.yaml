@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cp-kafka
+  name: cp-kafka
+spec:
+  selector:
+    app: cp-kafka
+  ports:
+    - port: 29092

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cp-zookeeper
+  name: cp-zookeeper
+spec:
+  ports:
+    - port: 32181
+  selector:
+    app: cp-zookeeper
