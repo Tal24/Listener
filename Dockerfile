@@ -1,3 +1,5 @@
 FROM openjdk:8-jdk-alpine
-COPY target/listener-0.0.?-SNAPSHOT.jar listener.jar
+ARG artifactId
+ARG version
+COPY target/${artifactId}-${version}.jar listener.jar
 ENTRYPOINT ["java","-jar","/listener.jar"]
