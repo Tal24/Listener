@@ -1,10 +1,12 @@
 package com.tsts.listener.client.rest.listenerdetails;
 
+import com.tsts.listener.configuration.database.mongodb.MongoCustomConfiguration;
 import com.tsts.listener.domain.entity.Listener;
 import com.tsts.listener.domain.listener.details.ListenerDetailsService;
 import com.tsts.listener.domain.listener.details.ListenerRegistrationService;
 import com.tsts.listener.dto.listenerdetails.ListenerDTO;
 import com.tsts.listener.mapper.listenerdetails.ListenerDetailsMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +20,21 @@ public class ListenerDetailsController {
     private final ListenerDetailsService listenerDetailsService;
     private final ListenerDetailsMapper listenerDetailsMapper;
 
+    @Autowired
+    private MongoCustomConfiguration mongoCustomConfiguration;
+
     public ListenerDetailsController (ListenerRegistrationService listenerRegistrationService,
                                       ListenerDetailsService listenerDetailsService,
                                       ListenerDetailsMapper listenerDetailsMapper) {
         this.listenerRegistrationService = listenerRegistrationService;
         this.listenerDetailsService = listenerDetailsService;
         this.listenerDetailsMapper = listenerDetailsMapper;
+    }
+
+    @GetMapping("/listener/mongo")
+    public ResponseEntity<String> getSocket () {
+        String s = "socket: " + mongoCustomConfiguration.getSocketTimeout() + "##########################";
+        return ResponseEntity.ok(s);
     }
 
     @GetMapping("/listener/{id}")
@@ -36,7 +47,7 @@ public class ListenerDetailsController {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity<ListenerDTO> registerListener (@Valid @RequestBody ListenerDTO listenerDTO) {
         Listener listener = listenerRegistrationService.register(listenerDetailsMapper.mapToListener(listenerDTO));
         return ResponseEntity.ok(listenerDetailsMapper.mapToListenerDTO(listener));
